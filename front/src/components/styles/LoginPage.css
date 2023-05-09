@@ -41,7 +41,7 @@ form.login input[type="password"]:focus {
 }
 
 @media only screen and (max-width: 500px) {
-    form.register {
+    form.login {
         max-width: 100%;
     }
 }
