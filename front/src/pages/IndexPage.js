@@ -6,8 +6,8 @@ export default function IndexPage() {
     useEffect(() => {
         fetch('http://localhost:4000/application', {
             credentials: 'include',
-        }).then(responce => {
-            responce.json().then(request => {
+        }).then(response => {
+            response.json().then(request => {
                 setRequests(request);
             });
         });

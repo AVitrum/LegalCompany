@@ -1,35 +1,49 @@
-import ReactQuill from "react-quill";
-import 'react-quill/dist/quill.snow.css';
-import {useState} from "react";
-import {Navigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Navigate, useParams} from "react-router-dom";
+import Editor from "../../components/Editor";
 
-export default function CreateRequest() {
+export default function EditRequest() {
+    const {id} = useParams();
     const [title, setTitle] = useState('');
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [description, setDescription] = useState('');
-    const [redirect, setRedirect] = useState('');
-    async function createNewRequest(ev) {
+    const [redirect, setRedirect] = useState(false);
+
+    useEffect(() => {
+        fetch('http://localhost:4000/application/' + id)
+            .then(response => {
+                response.json().then(requestInfo => {
+                    setTitle(requestInfo.title);
+                    setFullName(requestInfo.fullName);
+                    setEmail(requestInfo.email);
+                    setPhone(requestInfo.phone);
+                    setDescription(requestInfo.description);
+                });
+            });
+    }, []);
+
+    async function updateRequest(ev) {
         ev.preventDefault();
-        const responce = await fetch('http://localhost:4000/application', {
-            method: 'POST',
-            body: JSON.stringify({title, fullName, email, phone, description}),
+        const response = await fetch('http://localhost:4000/application', {
+            method: 'PUT',
+            body: JSON.stringify({title, fullName, email, phone, description, id}),
             headers: {'Content-Type':'application/json'},
             credentials: 'include',
         });
 
-        if (responce.ok) {
+        if (response.ok) {
             setRedirect(true);
         }
     }
 
     if (redirect) {
-        return <Navigate to={'/'}/>
+        return <Navigate to={'/application/' + id}/>
     }
 
     return (
-        <form onSubmit={createNewRequest}>
+        <form onSubmit={updateRequest}>
             <input type="title"
                    placeholder={'Title'}
                    value={title}
@@ -50,11 +64,9 @@ export default function CreateRequest() {
                    value={phone}
                    onChange={ev => setPhone(ev.target.value)}
             />
-            <ReactQuill value={description}
-                        onChange={newValue => setDescription(newValue)}
-            />
-            <button style={{marginTop: '5px'}}>Create application</button>
-            
+            <Editor onChange={setDescription} value={description}/>
+            <button style={{marginTop: '5px'}}>Update request</button>
+
         </form>
     );
 }

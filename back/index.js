@@ -99,4 +99,36 @@ app.get('/application', async (req, res) => {
     }
 });
 
+app.put('/application', async (req, res) => {
+    const {token} = req.cookies;
+    if (token) {
+        jwt.verify(token, secret, {}, async (err, info) => {
+            if (err) throw err;
+            const { id, title, fullName, email, phone, description } = req.body;
+            const requestDoc = await Request.findById(id)
+            const isAuthor = JSON.stringify(requestDoc.author) === JSON.stringify(info.id);
+            if (!isAuthor) {
+                return res.status(400).json('you are not the author')
+            }
+
+            await requestDoc.updateOne({
+                title,
+                fullName,
+                email,
+                phone,
+                description
+            });
+            res.json(requestDoc);
+        });
+    } else {
+        res.status(401).json({ message: 'No token provided' });
+    }
+});
+
+app.get('/application/:id', async (req, res) => {
+    const {id} = req.params;
+    const requestDoc = await Request.findById(id).populate('author', ['username']);
+    res.json(requestDoc)
+});
+
 app.listen(4000);
