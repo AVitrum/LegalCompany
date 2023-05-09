@@ -8,6 +8,7 @@ import {UserContextProvider} from "./components/UserContext";
 import CreateRequest from "./pages/RequestPages/CreateRequest";
 import RequestPage from "./pages/RequestPages/RequestPage";
 import EditRequest from "./pages/RequestPages/EditRequest";
+import AllRequestsPage from "./pages/RequestPages/AllRequestsPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
                   <Route index element={<IndexPage/>}/>
                   <Route path={'/login'} element={<LoginPage/>}/>
                   <Route path={'/register'} element={<RegisterPage/>}/>
+                  <Route path={'/show'} element={<AllRequestsPage/>} />
                   <Route path={'/create'} element={<CreateRequest/>}/>
                   <Route path={'/application/:id'} element={<RequestPage/>}/>
                   <Route path={'/edit/:id'} element={<EditRequest/>}/>

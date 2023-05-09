@@ -51,7 +51,7 @@ export default function CreateRequest() {
                    onChange={ev => setPhone(ev.target.value)}
             />
             <Editor onChange={setDescription} value={description}/>
-            <button style={{marginTop: '5px'}}>Create request</button>
+            <button type="submit" className="btn btn-primary">Create request</button>
             
         </form>
     );
