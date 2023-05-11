@@ -16,12 +16,14 @@ export default function AllRequestsPage() {
     }, []);
 
     return (
-        <table className="table">
-            <TableHeader />
-            <tbody>
-            {requests.length > 0 &&
-                requests.map((request) => <Request key={request._id} {...request} />)}
-            </tbody>
-        </table>
+        <div className="table-responsive">
+            <table className="table table-striped-columns border-secondary">
+                <TableHeader />
+                <tbody>
+                {requests.length > 0 &&
+                    requests.map((request) => <Request key={request._id} {...request} />)}
+                </tbody>
+            </table>
+        </div>
     );
 }

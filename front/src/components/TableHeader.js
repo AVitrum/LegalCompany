@@ -4,10 +4,10 @@ export default function TableHeader() {
     return (
         <thead>
         <tr>
-            <th scope="col">FullName</th>
-            <th scope="col">Title</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
+            <th>FullName</th>
+            <th>Title</th>
+            <th>Phone</th>
+            <th>Email</th>
         </tr>
         </thead>
     );

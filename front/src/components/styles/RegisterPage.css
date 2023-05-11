@@ -21,7 +21,6 @@ form.register input[type="password"] {
 form.register button {
     width: 100%;
     display: block;
-    background-color: #4CAF50;
     border: none;
     color: white;
     border-radius: 5px;
@@ -31,7 +30,8 @@ form.register button {
 }
 
 form.register button:hover {
-    background-color: #3e8e41;
+    background-color: #7DCEA0;
+    color: black;
 }
 
 form.register input[type="text"]:focus,

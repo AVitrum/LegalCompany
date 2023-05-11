@@ -34,19 +34,29 @@ export default function LoginPage() {
     return (
         <form className="login" onSubmit={login}>
             <h1>Login</h1>
-            <input
-                type="username"
-                placeholder="username"
-                value={username}
-                onChange={(ev) => setUsername(ev.target.value)}
-            />
-            <input
-                type="password"
-                placeholder="password"
-                value={password}
-                onChange={(ev) => setPassword(ev.target.value)}
-            />
-            <button>Login</button>
+            <div className="mb-3">
+                <label htmlFor="exampleInputEmail1" className="form-label">Username</label>
+                <input
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    type="username"
+                    placeholder="username"
+                    value={username}
+                    onChange={(ev) => setUsername(ev.target.value)}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                <input
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    type="password"
+                    placeholder="password"
+                    value={password}
+                    onChange={(ev) => setPassword(ev.target.value)}
+                />
+            </div>
+            <button className={'btn btn-primary'}>Login</button>
         </form>
     );
 }

@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
 import Editor from "../../components/Editor";
+import '../../components/styles/Editor.css'
+
 
 export default function EditRequest() {
     const {id} = useParams();
@@ -10,6 +12,13 @@ export default function EditRequest() {
     const [phone, setPhone] = useState('');
     const [description, setDescription] = useState('');
     const [redirect, setRedirect] = useState(false);
+    const [updateHover, setUpdateHover] = useState(false);
+
+    const updateStyle = {
+        backgroundColor: updateHover ? "#7DCEA0" : "",
+        borderColor: updateHover ? "#7DCEA0" : "",
+        color: updateHover ? "black" : "#fff",
+    }
 
     useEffect(() => {
         fetch('http://localhost:4000/application/' + id)
@@ -44,28 +53,61 @@ export default function EditRequest() {
 
     return (
         <form onSubmit={updateRequest}>
-            <input type="title"
-                   placeholder={'Title'}
-                   value={title}
-                   onChange={ev => setTitle(ev.target.value)}
-            />
-            <input type="fullName"
-                   placeholder={'FullName'}
-                   value={fullName}
-                   onChange={ev => setFullName(ev.target.value)}
-            />
-            <input type="email"
-                   placeholder={'Email'}
-                   value={email}
-                   onChange={ev => setEmail(ev.target.value)}
-            />
-            <input type="phone"
-                   placeholder={'Phone'}
-                   value={phone}
-                   onChange={ev => setPhone(ev.target.value)}
-            />
-            <Editor onChange={setDescription} value={description}/>
-            <button style={{marginTop: '5px'}}>Update request</button>
+            <h1>Create a request</h1>
+            <br></br>
+            <label htmlFor="exampleFormControlInput1" className="form-label">Title</label>
+            <div className={"mb-3"}>
+                <input type="title"
+                       className={"form-control"}
+                       required={true}
+                       placeholder={'Title'}
+                       value={title}
+                       onChange={ev => setTitle(ev.target.value)}
+                />
+            </div>
+            <div className={"mb-3"}>
+                <label htmlFor="exampleFormControlInput1" className="form-label">FullName</label>
+                <input type="fullName"
+                       className={"form-control"}
+                       required={true}
+                       placeholder={'FullName'}
+                       value={fullName}
+                       onChange={ev => setFullName(ev.target.value)}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
+                <input type="email"
+                       className={"form-control"}
+                       required={true}
+                       placeholder={'Email'}
+                       value={email}
+                       onChange={ev => setEmail(ev.target.value)}
+                />
+            </div>
+            <div className={"mb-3"}>
+                <label htmlFor="exampleFormControlInput1" className="form-label">Phone</label>
+                <input type="phone"
+                       className={"form-control"}
+                       required={true}
+                       placeholder={'Phone'}
+                       value={phone}
+                       onChange={ev => setPhone(ev.target.value)}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
+                <div className="editor-container">
+                    <Editor onChange={setDescription} value={description}/>
+                </div>
+            </div>
+            <button type="submit"
+                    className="btn btn-primary"
+                    onMouseOver={() => setUpdateHover(true)}
+                    onMouseOut={() => setUpdateHover(false)}
+                    style={updateStyle}>
+                Update request
+            </button>
 
         </form>
     );
