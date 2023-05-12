@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 
 export default function Header() {
+  const navigate = useNavigate();
   const { setUserInfo, userInfo } = useContext(UserContext);
   const [signInHover, setSignInHover] = useState(false);
   const [signUpHover, setSignUpHover] = useState(false);
@@ -35,7 +36,7 @@ export default function Header() {
       method: 'POST',
     }).then(() => {
       setUserInfo(null);
-      window.location.reload();
+      navigate('/');
     });
   }
 
