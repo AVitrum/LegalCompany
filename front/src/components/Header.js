@@ -3,10 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 
 export default function Header() {
-  const navigate = useNavigate();
   const { setUserInfo, userInfo } = useContext(UserContext);
   const [signInHover, setSignInHover] = useState(false);
   const [signUpHover, setSignUpHover] = useState(false);
+  const navigate = useNavigate();
 
   const signUpStyle = {
     backgroundColor: signUpHover ? "#7DCEA0" : "",
