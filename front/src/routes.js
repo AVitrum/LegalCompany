@@ -1,4 +1,3 @@
-import './App.css';
 import {Routes, Route} from 'react-router-dom'
 import Layout from './components/Layout';
 import HomePage from './pages/homePage';
@@ -10,7 +9,7 @@ import RequestPage from "./pages/request-pages/requestPage";
 import EditRequest from "./pages/request-pages/editRequest";
 import AllRequestsPage from "./pages/request-pages/allRequestsPage";
 
-function App() {
+function AppRoutes() {
     return (
         <UserContextProvider>
             <Routes>
@@ -28,5 +27,4 @@ function App() {
     );
 }
 
-export default App;
-
+export default AppRoutes;
