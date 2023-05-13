@@ -12,12 +12,12 @@ export default function CreateRequest() {
     const [description, setDescription] = useState('');
     const [redirect, setRedirect] = useState('');
     const [createHover, setCreateHover] = useState(false);
-
     const createStyle = {
         backgroundColor: createHover ? "#7DCEA0" : "",
         borderColor: createHover ? "#7DCEA0" : "",
         color: createHover ? "black" : "#fff",
     }
+
     async function createNewRequest(ev) {
         ev.preventDefault();
         const response = await fetch('http://localhost:4000/application', {
@@ -94,7 +94,6 @@ export default function CreateRequest() {
                     style={createStyle}>
                 Update request
             </button>
-
         </form>
     );
 }

@@ -34,6 +34,14 @@ header nav {
   /*text-decoration: none;*/
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
 
 header {
   position: fixed;

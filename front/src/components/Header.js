@@ -7,13 +7,11 @@ export default function Header() {
   const [signInHover, setSignInHover] = useState(false);
   const [signUpHover, setSignUpHover] = useState(false);
   const navigate = useNavigate();
-
   const signUpStyle = {
     backgroundColor: signUpHover ? "#7DCEA0" : "",
     borderColor: signUpHover ? "#7DCEA0" : "",
     color: signUpHover ? "black" : "#fff",
   }
-
   const signInStyle = {
     backgroundColor: signInHover ? "#7DCEA0" : "",
     borderColor: signInHover ? "#7DCEA0" : "",
@@ -43,7 +41,6 @@ export default function Header() {
   const username = userInfo?.username;
 
   return (
-
       <nav className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#CDB891', height: "80px", width: "100%" }}>
         <div className="container-fluid">
           <Link to="/" className="navbar-brand ">LegalCompany</Link>
@@ -59,6 +56,7 @@ export default function Header() {
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             {username ? (
                 <li className="nav-item dropdown">
+                  <div className="dropdown">
                   <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     {username}
                   </a>
@@ -69,6 +67,7 @@ export default function Header() {
                     <li><hr className="dropdown-divider"></hr></li>
                     <li><button onClick={logout} className="dropdown-item">Sign Out</button></li>
                   </ul>
+                  </div>
                 </li>
             ) : (
                 <>
@@ -93,7 +92,6 @@ export default function Header() {
                   </li>
                 </>
             )}
-
           </ul>
         </div>
       </nav>

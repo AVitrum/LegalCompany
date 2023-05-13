@@ -13,7 +13,6 @@ export default function EditRequest() {
     const [description, setDescription] = useState('');
     const [redirect, setRedirect] = useState(false);
     const [updateHover, setUpdateHover] = useState(false);
-
     const updateStyle = {
         backgroundColor: updateHover ? "#7DCEA0" : "",
         borderColor: updateHover ? "#7DCEA0" : "",

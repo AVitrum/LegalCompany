@@ -7,7 +7,6 @@ export default function RequestPage() {
     const {userInfo} = useContext(UserContext);
     const {id} = useParams();
     const [updateHover, setUpdateHover] = useState(false);
-
     const updateStyle = {
         backgroundColor: updateHover ? "#EEEC44" : "",
         borderColor: updateHover ? "#EEEC44" : "",
@@ -22,9 +21,11 @@ export default function RequestPage() {
                 });
             });
     }, []);
+
     if (!requestInfo) {
         return '';
     }
+    
     return (
         <div className="p-5 mb-4 rounded-3" style={{ backgroundColor: '#F7E7CE' }}>
             <div className="container-fluid py-5">
@@ -44,7 +45,5 @@ export default function RequestPage() {
                 )}
             </div>
         </div>
-
-
     );
 }

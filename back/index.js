@@ -141,5 +141,4 @@ app.delete('/application/:id', async (req, res) => {
     }
 });
 
-
 app.listen(4000);
