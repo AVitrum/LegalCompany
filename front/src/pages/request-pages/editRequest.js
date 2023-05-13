@@ -33,6 +33,19 @@ export default function EditRequest() {
             });
     }, []);
 
+    async function deleteRequest(ev) {
+        ev.preventDefault();
+        const response = await fetch('http://localhost:4000/application/' + id, {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            setRedirect(true);
+        }
+    }
+
     async function updateRequest(ev) {
         ev.preventDefault();
         const response = await fetch('http://localhost:4000/application', {
@@ -107,6 +120,12 @@ export default function EditRequest() {
                     onMouseOut={() => setUpdateHover(false)}
                     style={updateStyle}>
                 Update request
+            </button>
+            <div className={"mb-3"}></div>
+            <button type="button"
+                    className="btn btn-danger"
+                    onClick={deleteRequest}>
+                Delete request
             </button>
 
         </form>
