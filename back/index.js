@@ -131,4 +131,15 @@ app.get('/application/:id', async (req, res) => {
     res.json(requestDoc)
 });
 
+app.delete('/application/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const requestDoc = await Request.findByIdAndDelete(id);
+        res.json(requestDoc);
+    } catch (e) {
+        res.status(400).json(e);
+    }
+});
+
+
 app.listen(4000);
