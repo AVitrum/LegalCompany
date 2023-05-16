@@ -7,6 +7,7 @@ const RequestSchema = new Schema({
     email: String,
     phone: String,
     description: String,
+    reaction: String,
     author: { type: Schema.Types.ObjectId, ref: 'User' },
 }, {
     timestamps: true,

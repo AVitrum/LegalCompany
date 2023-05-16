@@ -31,8 +31,11 @@ export default function RequestPage() {
             <div className="container-fluid py-5">
                 <h2 className="display-7 fw-bold">{requestInfo.title}</h2>
                 <p>{requestInfo.fullName} | {requestInfo.email} | {requestInfo.phone}</p>
-                <hr/>
                 <p className="col-md-8 fs-4" dangerouslySetInnerHTML={{__html: requestInfo.description}}/>
+                <hr/>
+                <h3 className="display-9 fw-bold">Reaction</h3>
+                <p>(If there is nothing here, your request is being processed)</p>
+                <p className="col-md-8 fs-4">{requestInfo.reaction}</p>
                 {userInfo.id === requestInfo.author._id && (
                     <button className="btn btn-primary"
                             onMouseOver={() => setUpdateHover(true)}
@@ -41,6 +44,13 @@ export default function RequestPage() {
                             type="button"
                             onClick={() => { window.location.href = `/edit/${requestInfo._id}` }}>
                         Edit this request
+                    </button>
+                )}
+                {userInfo.isAdmin && (
+                    <button className="btn btn-primary"
+                            type="button"
+                            onClick={() => { window.location.href = `/edit/${requestInfo._id}` }}>
+                        Add reaction
                     </button>
                 )}
             </div>

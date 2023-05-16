@@ -92,7 +92,7 @@ export default function CreateRequest() {
                     onMouseOver={() => setCreateHover(true)}
                     onMouseOut={() => setCreateHover(false)}
                     style={createStyle}>
-                Update request
+                Create request
             </button>
         </form>
     );

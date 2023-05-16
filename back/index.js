@@ -20,11 +20,12 @@ app.use(cookieParser());
 mongoose.connect('mongodb+srv://Andrey:Almashi@cluster0.puwivj4.mongodb.net/?retryWrites=true&w=majority');
 
 app.post('/register', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, isAdmin } = req.body;
     try {
         const userDoc = await User.create({
             username,
             password: bcrypt.hashSync(password, salt),
+            isAdmin,
         });
         res.json(userDoc);
     } catch (e) {
@@ -37,11 +38,12 @@ app.post('/login', async (req, res) => {
     const userDoc = await User.findOne({ username });
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
-        jwt.sign({ username, id: userDoc._id }, secret, {}, (err, token) => {
+        jwt.sign({ username, id: userDoc._id, isAdmin: userDoc.isAdmin }, secret, {}, (err, token) => {
             if (err) throw err;
             res.cookie('token', token).json({
                 id: userDoc._id,
                 username,
+                isAdmin: userDoc.isAdmin,
             });
         });
     } else {
@@ -76,6 +78,7 @@ app.post('/application', async (req, res) => {
             email,
             phone,
             description,
+            reaction: "",
             author: info.id,
         });
         res.json(requestDoc);
@@ -87,26 +90,35 @@ app.get('/application', async (req, res) => {
     if (token) {
         jwt.verify(token, secret, {}, async (err, info) => {
             if (err) throw err;
-            const author = info.id;
-            const requests = await Request.find({ author })
-                .populate('author', ['username'])
-                .sort({ createdAt: -1 })
-                .limit(20);
-            res.json(requests);
+            if (info.isAdmin) {
+                const requests = await Request.find({})
+                    .populate('author', ['username'])
+                    .sort({ createdAt: -1 })
+                    .limit(20);
+                res.json(requests);
+            } else {
+                const author = info.id;
+                const requests = await Request.find({ author })
+                    .populate('author', ['username'])
+                    .sort({ createdAt: -1 })
+                    .limit(20);
+                res.json(requests);
+            }
         });
     } else {
         res.status(401).json({ message: 'No token provided' });
     }
 });
 
+
 app.put('/application', async (req, res) => {
     const {token} = req.cookies;
     if (token) {
         jwt.verify(token, secret, {}, async (err, info) => {
             if (err) throw err;
-            const { id, title, fullName, email, phone, description } = req.body;
+            const { id, title, fullName, email, phone, description, reaction } = req.body;
             const requestDoc = await Request.findById(id)
-            const isAuthor = JSON.stringify(requestDoc.author) === JSON.stringify(info.id);
+            const isAuthor = JSON.stringify(requestDoc.author) === JSON.stringify(info.id) || info.isAdmin;
             if (!isAuthor) {
                 return res.status(400).json('you are not the author')
             }
@@ -116,7 +128,8 @@ app.put('/application', async (req, res) => {
                 fullName,
                 email,
                 phone,
-                description
+                description,
+                reaction,
             });
             res.json(requestDoc);
         });

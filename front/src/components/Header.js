@@ -39,19 +39,30 @@ export default function Header() {
   }
 
   const username = userInfo?.username;
+  const isAdmin = userInfo?.isAdmin;
 
   return (
       <nav className="navbar navbar-expand-lg fixed-top" style={{ backgroundColor: '#CDB891', height: "80px", width: "100%" }}>
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand ">LegalCompany</Link>
+            <Link to="/" className="navbar-brand">
+              <img
+                  src="/logo.png"
+                  alt="Logo"
+                  className="navbar-logo navbar-logo-small"
+              />
+              Camel Legal Company
+            </Link>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {username ? (
-                <>
-                  <li className="nav-item">
-                    <Link to={'/create'} className="nav-link">Create Request</Link>
-                  </li>
-                </>
-            ) : null}
+            {username && (
+                <li className="nav-item">
+                  <Link to="/create" className="nav-link">Create Request</Link>
+                </li>
+            )}
+            {isAdmin && (
+                <li className="nav-item">
+                  <Link to="/show" className="nav-link">All user requests</Link>
+                </li>
+            )}
           </ul>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             {username ? (
@@ -61,10 +72,16 @@ export default function Header() {
                     {username}
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><button className={"dropdown-item"}>Profile</button></li>
-                    <li><hr className="dropdown-divider"></hr></li>
-                    <li><Link to={'/show'} className="dropdown-item">My requests</Link></li>
-                    <li><hr className="dropdown-divider"></hr></li>
+                    {!userInfo.isAdmin && (
+                      <>
+                        <li>
+                          <Link to={'/show'} className="dropdown-item">
+                            My requests
+                          </Link>
+                        </li>
+                        <li><hr className="dropdown-divider"></hr></li>
+                      </>
+                    )}
                     <li><button onClick={logout} className="dropdown-item">Sign Out</button></li>
                   </ul>
                   </div>
