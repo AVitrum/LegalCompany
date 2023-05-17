@@ -37,8 +37,12 @@ header nav {
 
 .link-as-text {
   color: inherit;
-  /*text-decoration: none;*/
 }
+.link-as-text-without-decoration {
+  text-decoration: none;
+}
+
+
 
 .dropdown {
   position: relative;

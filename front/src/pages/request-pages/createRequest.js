@@ -81,7 +81,7 @@ export default function CreateRequest() {
                 />
             </div>
             <div className="mb-3">
-                <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
+                <label htmlFor="exampleFormControlTextarea1" className="form-label">Description</label>
                 <div className="editor-container">
                     <Editor onChange={setDescription} value={description}/>
                 </div>
