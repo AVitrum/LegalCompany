@@ -1,9 +1,10 @@
 import {useState} from 'react';
-import '../../styles/components/register-page.css'
+import '../../styles/register-page.css'
 import {Navigate} from "react-router-dom";
 
 export default function RegisterPage() {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
     
@@ -11,7 +12,7 @@ export default function RegisterPage() {
         ev.preventDefault();
         const response = await fetch('http://localhost:4000/register', {
             method: 'POST',
-            body: JSON.stringify({username, password}),
+            body: JSON.stringify({username, email, password}),
             headers: {'Content-Type':'application/json'},
         });
         if (response.status === 200) {
@@ -33,15 +34,27 @@ export default function RegisterPage() {
                 <input type="text"
                        className="form-control"
                        id="exampleInputEmail1"
+                       required
                        placeholder="username"
                        value={username}
                        onChange={ev => setUsername(ev.target.value)}/>
+            </div>
+            <div className="mb-3">
+                <label htmlFor="exampleInputEmail1" className="form-label">Email</label>
+                <input type="email"
+                       className="form-control"
+                       required
+                       id="exampleInputEmail1"
+                       placeholder="email"
+                       value={email}
+                       onChange={ev => setEmail(ev.target.value)}/>
             </div>
             <div className="mb-3">
                 <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                 <input type="password"
                        className="form-control"
                        id="exampleInputPassword1"
+                       required
                        placeholder="password"
                        value={password}
                        onChange={ev => setPassword(ev.target.value)}/>

@@ -4,11 +4,12 @@ export default function TableHeader() {
     return (
         <thead>
         <tr>
-            <th>Full Name</th> {/* Зміна заголовка колонки */}
+            <th>Full Name</th>
             <th>Title</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Created At</th> {/* Додаткова колонка: дата створення */}
+            <th>Author</th>
+            <th>Created At</th>
         </tr>
         </thead>
     );

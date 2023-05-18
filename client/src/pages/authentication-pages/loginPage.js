@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../components/UserContext";
-import '../../styles/components/login-page.css';
+import '../../styles/login-page.css';
 
 export default function LoginPage() {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [redirect, setRedirect] = useState(false);
     const { setUserInfo } = useContext(UserContext);
@@ -13,7 +13,7 @@ export default function LoginPage() {
         ev.preventDefault();
         const response = await fetch("http://localhost:4000/login", {
             method: "POST",
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ email, password }),
             headers: { "Content-Type": "application/json" },
             credentials: "include",
         });
@@ -36,20 +36,22 @@ export default function LoginPage() {
         <form className="login" onSubmit={login}>
             <h1>Login</h1>
             <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">Username</label>
+                <label htmlFor="exampleInputEmail1" className="form-label">Email</label>
                 <input
                     className="form-control"
+                    required
                     id="exampleInputEmail1"
-                    type="username"
-                    placeholder="username"
-                    value={username}
-                    onChange={(ev) => setUsername(ev.target.value)}
+                    type="email"
+                    placeholder="email"
+                    value={email}
+                    onChange={(ev) => setEmail(ev.target.value)}
                 />
             </div>
             <div className="mb-3">
                 <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                 <input
                     className="form-control"
+                    required
                     id="exampleInputPassword1"
                     type="password"
                     placeholder="password"

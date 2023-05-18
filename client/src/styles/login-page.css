@@ -8,6 +8,15 @@ form.login h1 {
 }
 
 form.login input[type="text"],
+form.login input[type="email"] {
+    display: block;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
 form.login input[type="password"] {
     display: block;
     margin-bottom: 15px;

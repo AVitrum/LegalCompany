@@ -8,6 +8,7 @@ import CreateRequest from "./pages/request-pages/createRequest";
 import RequestPage from "./pages/request-pages/requestPage";
 import EditRequest from "./pages/request-pages/editRequest";
 import AllRequestsPage from "./pages/request-pages/allRequestsPage";
+import ContactPage from "./pages/contactPage";
 
 function AppRoutes() {
     return (
@@ -21,6 +22,7 @@ function AppRoutes() {
                     <Route path={'/create'} element={<CreateRequest/>}/>
                     <Route path={'/application/:id'} element={<RequestPage/>}/>
                     <Route path={'/edit/:id'} element={<EditRequest/>}/>
+                    <Route path={'/contact'} element={<ContactPage />}></Route>
                 </Route>
             </Routes>
         </UserContextProvider>

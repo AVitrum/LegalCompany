@@ -4,6 +4,22 @@
   background-color: none;
 }
 
+.navbar-logo-small-human {
+  width: 40px;
+  height: auto;
+  background-color: none;
+  margin-left: 10px;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.nav-item.dropdown .dropdown-toggle {
+  margin-right: 10px;
+}
+
+
 .link-as-text {
   color: inherit;
 }

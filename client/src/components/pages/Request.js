@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Request({ _id, title, email, phone, author, createdAt }) {
+export default function Request({ _id, title, email, phone, fullName, author, createdAt }) {
     return (
         <tr>
-            <td>{author.username}</td>
+            <td>{fullName}</td>
             <td>
                 <Link to={`/application/${_id}`} className="link-as-text">
                     {title}
@@ -12,6 +12,7 @@ export default function Request({ _id, title, email, phone, author, createdAt })
             </td>
             <td>{phone}</td>
             <td>{email}</td>
+            <td>{author.username}</td>
             <td>{createdAt}</td>
         </tr>
     );

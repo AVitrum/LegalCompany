@@ -17,6 +17,15 @@ form.register input[type="password"] {
     border-radius: 5px;
     background-color: #f0f0f0;
 }
+form.register input[type="email"] {
+    display: block;
+    margin-bottom: 15px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
 
 form.register button {
     width: 100%;

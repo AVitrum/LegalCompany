@@ -10,12 +10,12 @@ export default function Header() {
   const signUpStyle = {
     backgroundColor: signUpHover ? "#7DCEA0" : "",
     borderColor: signUpHover ? "#7DCEA0" : "",
-    color: signUpHover ? "black" : "#fff",
+    color: "black"
   };
   const signInStyle = {
     backgroundColor: signInHover ? "#7DCEA0" : "",
     borderColor: signInHover ? "#7DCEA0" : "",
-    color: signInHover ? "black" : "#fff",
+    color: "black"
   };
 
   useEffect(() => {
@@ -48,9 +48,8 @@ export default function Header() {
             <img src="/logo.png" alt="Logo" className="navbar-logo navbar-logo-small" />
             Camel Legal Company
           </Link>
-
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               {username && !isAdmin && (
                   <li className="nav-item">
                     <Link to="/create" className="nav-link">Create Request</Link>
@@ -61,24 +60,29 @@ export default function Header() {
                     <Link to="/show" className="nav-link">All user requests</Link>
                   </li>
               )}
+              <li className="nav-item">
+                <Link to="/contact" className="nav-link">Our contacts</Link>
+              </li>
             </ul>
 
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav">
               {username ? (
                   <li className="nav-item dropdown">
                     <a
-                        className="nav-link dropdown-toggle"
+                        className="dropdown-toggle"
                         href="#"
                         id="navbarDropdown"
                         role="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                     >
-                      {username}
+                      <img src="/humanIcon.png" alt="Logo" className="navbar-logo navbar-logo-small-human" />
                     </a>
                     <ul className="dropdown-menu dropdown-menu-right dropdown-menu-end" aria-labelledby="navbarDropdown">
                       {!isAdmin && (
                           <>
+                            <li className="dropdown-item">{username}</li>
+                            <li><hr className="dropdown-divider" /></li>
                             <li>
                               <Link to="/show" className="dropdown-item">
                                 My requests
@@ -91,31 +95,43 @@ export default function Header() {
                     </ul>
                   </li>
               ) : (
-                  <>
-                    <li className="nav-item">
-                      <Link
-                          to="/login"
-                          onMouseOver={() => setSignInHover(true)}
-                          onMouseOut={() => setSignInHover(false)}
-                          className={`btn btn-primary`}
-                          style={signInStyle}
-                      >
-                        Sign In
-                      </Link>
-                    </li>
-                    <li className="nav-item mx-2"></li>
-                    <li className="nav-item">
-                      <Link
-                          to="/register"
-                          onMouseOver={() => setSignUpHover(true)}
-                          onMouseOut={() => setSignUpHover(false)}
-                          className={`btn btn-primary`}
-                          style={signUpStyle}
-                      >
-                        Sign Up
-                      </Link>
-                    </li>
-                  </>
+                  <li className="nav-item dropdown">
+                    <a
+                        className="dropdown-toggle"
+                        href="#"
+                        id="navbarDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                      <img src="/humanIcon.png" alt="Logo" className="navbar-logo navbar-logo-small-human" />
+                    </a>
+                    <ul className="dropdown-menu dropdown-menu-right dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li>
+                        <Link
+                            to="/login"
+                            onMouseOver={() => setSignInHover(true)}
+                            onMouseOut={() => setSignInHover(false)}
+                            className={`dropdown-item`}
+                            style={signInStyle}
+                        >
+                          Sign In
+                        </Link>
+                      </li>
+                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <Link
+                            to="/register"
+                            onMouseOver={() => setSignUpHover(true)}
+                            onMouseOut={() => setSignUpHover(false)}
+                            className={`dropdown-item`}
+                            style={signUpStyle}
+                        >
+                          Sign Up
+                        </Link>
+                      </li>
+                    </ul>
+                  </li>
               )}
             </ul>
           </div>

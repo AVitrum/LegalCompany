@@ -7,10 +7,11 @@ const salt = bcrypt.genSaltSync(10);
 const secret = 'dfglgkdfdfg';
 
 const register = async (req, res) => {
-    const { username, password, isAdmin } = req.body;
+    const { username, email, password, isAdmin } = req.body;
     try {
         const userDoc = await User.create({
             username,
+            email,
             password: bcrypt.hashSync(password, salt),
             isAdmin,
         });
@@ -21,15 +22,17 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { username, password } = req.body;
-    const userDoc = await User.findOne({ username });
+    const { email, password } = req.body;
+    const userDoc = await User.findOne({ email });
+    const username = userDoc.username;
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
-        jwt.sign({ username, id: userDoc._id, isAdmin: userDoc.isAdmin }, secret, {}, (err, token) => {
+        jwt.sign({ username, email, id: userDoc._id, isAdmin: userDoc.isAdmin }, secret, {}, (err, token) => {
             if (err) throw err;
             res.cookie('token', token).json({
                 id: userDoc._id,
                 username,
+                email,
                 isAdmin: userDoc.isAdmin,
             });
         });
