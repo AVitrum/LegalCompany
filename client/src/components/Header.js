@@ -79,10 +79,10 @@ export default function Header() {
                       <img src="/humanIcon.png" alt="Logo" className="navbar-logo navbar-logo-small-human" />
                     </a>
                     <ul className="dropdown-menu dropdown-menu-right dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li className="dropdown-item">{username}</li>
+                      <li><hr className="dropdown-divider" /></li>
                       {!isAdmin && (
                           <>
-                            <li className="dropdown-item">{username}</li>
-                            <li><hr className="dropdown-divider" /></li>
                             <li>
                               <Link to="/show" className="dropdown-item">
                                 My requests

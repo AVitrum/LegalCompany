@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import Editor from "../../components/pages/Editor";
 import "../../styles/components/editor.css";
 import { UserContext } from "../../components/UserContext";
@@ -61,6 +61,10 @@ export default function EditRequest() {
             navigate("/application/" + id);
         }
     }
+
+    const goBackToAllRequests = () => {
+        navigate("/show");
+    };
 
 
     return (
@@ -161,7 +165,15 @@ export default function EditRequest() {
                         </button>
                     </>
                 )}
-
+                <div className="form-group">
+                    <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={goBackToAllRequests}
+                    >
+                        Back
+                    </button>
+                </div>
                 <div className="form-group">
                     <button
                         type="button"
